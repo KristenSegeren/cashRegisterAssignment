@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -29,74 +30,101 @@ namespace cashRegisterAssignment
         double finalLevis;
         double finalWranglers;
         double finalSilver;
+        bool receipt = false;
+        bool calculate = false;
 
 
         private void calculateButton_Click(object sender, EventArgs e)
         {
-            //input
-            numOfLevis = Convert.ToDouble(levisInput.Text);
-            numOfWrangler = Convert.ToDouble(wranglersInput.Text);
-            numOfSilver = Convert.ToDouble(silversInput.Text);
+            try
+            {
+                //input
+                numOfLevis = Convert.ToDouble(levisInput.Text);
+                numOfWrangler = Convert.ToDouble(wranglersInput.Text);
+                numOfSilver = Convert.ToDouble(silversInput.Text);
 
-            //calculations
-            finalLevis = levis * numOfLevis;
-            finalWranglers = wrangler * numOfWrangler;
-            finalSilver = silver * numOfSilver;
+                //calculations
+                finalLevis = levis * numOfLevis;
+                finalWranglers = wrangler * numOfWrangler;
+                finalSilver = silver * numOfSilver;
 
-            subTotal = finalLevis + finalWranglers + finalSilver;
-            taxTotal = subTotal * 0.13;
-            total = subTotal + taxTotal;
+                subTotal = finalLevis + finalWranglers + finalSilver;
+                taxTotal = subTotal * 0.13;
+                total = subTotal + taxTotal;
 
-            //output
-            subTotalOutput.Text = $"{subTotal.ToString("C")}";
-            taxTotalOutput.Text = $"{taxTotal.ToString("C")}";
-            totalOutput.Text = $"{total.ToString("C")}";
+                //output
+                subTotalOutput.Text = $"{subTotal.ToString("C")}";
+                taxTotalOutput.Text = $"{taxTotal.ToString("C")}";
+                totalOutput.Text = $"{total.ToString("C")}";
+            }
+            catch
+            {
+                subTotalOutput.Text = $"please ";
+                taxTotalOutput.Text = $"insert";
+                totalOutput.Text = $"numbers";
+            }
+
+            calculate = true;
         }
         private void calculateChangeButton_Click(object sender, EventArgs e)
         {
-            tender = Convert.ToDouble(tenderInput.Text);
-            change = tender - total;
-            changeOutput.Text = $"{change.ToString("C")}";
-
+            if (calculate == true)
+            {
+                tender = Convert.ToDouble(tenderInput.Text);
+                change = tender - total;
+                changeOutput.Text = $"{change.ToString("C")}";
+                receipt = true;
+            }
         }
         private void printReciptButton_Click(object sender, EventArgs e)
         {
-            reciptLabel.Text = $"The Denim Shop\n\n";
-            Thread.Sleep(800);
-            Refresh();
-            reciptLabel.Text += $"You bought...\n";
-            Thread.Sleep(800);
-            Refresh();
-            reciptLabel.Text += $"{numOfLevis} Levis                        @${levis}\n";
-            Thread.Sleep(800);
-            Refresh();
-            reciptLabel.Text += $"{numOfSilver} Silvers                      @${silver}\n";
-            Thread.Sleep(800);
-            Refresh();
-            reciptLabel.Text += $"{numOfWrangler} Wranglers                @${wrangler}\n\n";
-            Thread.Sleep(800);
-            Refresh();
-            reciptLabel.Text += $"for a total of...\n";
-            Thread.Sleep(800);
-            Refresh();
-            reciptLabel.Text += $"${total}\n";
-            Thread.Sleep(800);
-            Refresh();
-            reciptLabel.Text += $"you paid...\n";
-            Thread.Sleep(800);
-            Refresh();
-            reciptLabel.Text += $"${tender} \n\n";
-            Thread.Sleep(800);
-            Refresh();
-            reciptLabel.Text += $"You will recieve {change.ToString("C")} in change\n\n";
-            Thread.Sleep(800);
-            Refresh();
-            reciptLabel.Text += $"Thank You For Shopping at Counterfeit Marks\n";
-            Thread.Sleep(800);
-            Refresh();
-            reciptLabel.Text += $"Have A Wonderful Day:)\n";
-            Thread.Sleep(800);
-            Refresh();
+            if (receipt == true)
+            {
+
+               // SoundPlayer printerPlayer = new SoundPlayer(Properties.Resources.printerNoise);
+                //printerPlayer.Play();
+
+
+                reciptLabel.Text = $"The Denim Shop\n\n";
+                Thread.Sleep(800);
+                Refresh();
+                reciptLabel.Text += $"You bought...\n";
+                Thread.Sleep(800);
+                Refresh();
+                reciptLabel.Text += $"{numOfLevis} Levis                        @${levis}\n";
+                Thread.Sleep(800);
+                Refresh();
+                reciptLabel.Text += $"{numOfSilver} Silvers                      @${silver}\n";
+                Thread.Sleep(800);
+                Refresh();
+                reciptLabel.Text += $"{numOfWrangler} Wranglers                @${wrangler}\n\n";
+                Thread.Sleep(800);
+                Refresh();
+                reciptLabel.Text += $"for a total of...\n";
+                Thread.Sleep(800);
+                Refresh();
+                reciptLabel.Text += $"${total}\n";
+                Thread.Sleep(800);
+                Refresh();
+                reciptLabel.Text += $"you paid...\n";
+                Thread.Sleep(800);
+                Refresh();
+                reciptLabel.Text += $"${tender} \n\n";
+                Thread.Sleep(800);
+                Refresh();
+                reciptLabel.Text += $"You will recieve {change.ToString("C")} in change\n\n";
+                Thread.Sleep(800);
+                Refresh();
+                reciptLabel.Text += $"Thank You For Shopping at Counterfeit Marks\n";
+                Thread.Sleep(800);
+                Refresh();
+                reciptLabel.Text += $"Have A Wonderful Day:)\n";
+                Thread.Sleep(800);
+                Refresh();
+
+               // printerPlayer.Stop();
+            }
+
         }
         private void resetButton_Click(object sender, EventArgs e)
         {
@@ -109,6 +137,20 @@ namespace cashRegisterAssignment
             levisInput.Text = "";
             wranglersInput.Text = "";
             silversInput.Text = "";
+
+            numOfLevis = 0;
+            numOfWrangler = 0;
+            numOfSilver = 0;
+            subTotal = 0;
+            taxTotal = 0;
+            total = 0;
+            tender = 0;
+            change = 0;
+
+
+            receipt = false;
+            calculate = false;
         }
     }
 }
+
