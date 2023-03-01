@@ -81,8 +81,8 @@ namespace cashRegisterAssignment
             if (receipt == true)
             {
 
-               // SoundPlayer printerPlayer = new SoundPlayer(Properties.Resources.printerNoise);
-                //printerPlayer.Play();
+                SoundPlayer printerPlayer = new SoundPlayer(Properties.Resources.printerNoise);
+                printerPlayer.Play();
 
 
                 reciptLabel.Text = $"The Denim Shop\n\n";
@@ -122,7 +122,7 @@ namespace cashRegisterAssignment
                 Thread.Sleep(800);
                 Refresh();
 
-               // printerPlayer.Stop();
+                printerPlayer.Stop();
             }
 
         }

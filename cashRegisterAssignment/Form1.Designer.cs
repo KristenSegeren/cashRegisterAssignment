@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CounterfeitMarks));
             this.titleLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.levisLabel = new System.Windows.Forms.Label();
@@ -319,6 +320,7 @@
             this.Controls.Add(this.levisLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.titleLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CounterfeitMarks";
             this.Text = "Counterfeit Marks";
             this.ResumeLayout(false);
